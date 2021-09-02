@@ -1,8 +1,35 @@
 <template>
     <header class="header">
         <div class="header--container">
-            <i class="fas fa-bars"></i>
-            <input class="header__search" type="search" placeholder="search">
+            
+            <span class="header__menu-button"  @click="menuOpen = !menuOpen">
+                <md-icon>menu</md-icon>
+            </span>
+            <div class="header__aside aside" >   
+          <!--:class="{'show-menu': menuOpen}" -->
+                <ul class="aside__menu" :class="{'show-menu': menuOpen}">
+                    <li class="menu__item" to="/">
+                        <span class="menu__title">My cards</span>
+                        <div class="menu__content">
+                            <div class="menu__card">
+                                <md-icon>business</md-icon>card 1</div>
+                            <div class="menu__card">card 1</div>
+                            <div class="menu__card">card 1</div>
+                        </div>
+                    </li>
+                    <li class="menu__item" to="/operations">
+                        <span class="menu__title">Wish List</span>
+                        <div class="menu__content">
+                            <div class="menu__card">
+                                <md-icon>business</md-icon>card 1</div>
+                            <div class="menu__card">card 1</div>
+                            <div class="menu__card">card 1</div>
+                        </div>
+                    </li>
+                </ul>
+        <!-- <button @click="logout">Log out</button> -->
+    </div>
+
         </div>
         <nav class="header__navigation">
             <ul class="navigation-list">
@@ -12,7 +39,6 @@
             </ul>
         </nav>
         <div class="header__user">
-            <img src="@/assets/settings.png" alt="user" class="user__settings">
             <img src="@/assets/Userpic.png" alt="user" class="user__img">
             <div class="user__info">
                 <div class="user__name">Anna Glovyak</div>
@@ -27,83 +53,14 @@
 
 
 export default {
-    
+    data(){
+        return {
+            menuOpen: true
+        }
+    },
 }
 </script>
 
 <style scoped>
 
-    .header {
-        max-width: 1600px;
-        width: 100%;
-        height: 68px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0 auto;
-        font-size: 16px;
-        font-weight: 600;
-        padding: 0 20px;
-        
-    }
-    .header__search {
-        width: 220px;
-        height: 36px;
-        background: #F2F3F7;
-        border: none;
-        border-radius: 5px;  
-    }
-    .header__user {
-        max-width: 350px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .user__img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-    }
-    .user__name {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 20px;
-        color: #2E2E3A;
-    }
-    .user__title{
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 16px;
-        color: #9A9AAF;
-    }
-    .user__settings{
-        width: 19px;
-        height: 19px;
-    }
-
-    .navigation-list {
-        display: flex;
-        list-style: none;
-    }
-    .navigation-list__item {
-        padding: 0 20px;
-        
-    }
-    .md-theme-default a:not(.md-button){
-        color: black;
-    }
-    .header--container {
-        align-content: center;
-        max-width: 350px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-    .navigation-list__link {
-        text-decoration: none;
-        color: black;
-    }
 </style>

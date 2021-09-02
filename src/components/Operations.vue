@@ -1,91 +1,80 @@
 <template>
     <div class="operations">
-        <h2>Last transaction</h2>
-        <p>Operations content</p>
-        <ul>
-             <li v-for="transaction in transactions" :key="transaction.number">
-                 <div class="transactions__company">{{ transaction.company }} </div>
-                <div class="transactions__sum">{{ transaction.sum }} </div>
-                <div class="transactions__date">{{ transaction.date }} </div>
-             </li>
-        </ul>
-        <button @click="addTransaction"> Add transaction </button>
-        
+        <div class="operations__content">
+            <div class="transactions">
+            <h2 class="transactions__title">Last transaction</h2>
+            <ul class="transactions__list">
+                <li class="transactions__item" v-for="transaction in allTransactions" :key="transaction.number">
+                    <div class="transactions__date">{{ transaction.date }}</div>
+                    <!-- <div class="transaction__card">{{ transaction.cardId }}</div> -->
+                    <div class="transactions__company">{{ transaction.company }} </div>
+                    <div class="transactions__department">{{ transaction.department }}</div>
+                    <div class="transactions__sum">{{ transaction.sum }} </div>
+                    <!-- <div class="transactions__date"> </div> -->
+                </li>
+            </ul>
+            <button @click="addTransaction(payload)"> Add transaction </button> 
+            </div>
+            <div class="statistic">
+                <h2 class="statistic__title">Statistic</h2>
+            </div>
+        </div> 
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-import { db } from '../main.js'
-import { collection, getDocs, setDoc, doc} from "firebase/firestore"; 
+// import axios from 'axios'
+// import { db } from '../main.js'
+// import { collection, getDocs, setDoc, doc} from "firebase/firestore"; 
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
     
     data(){
         return{
-             transactions: []
-        }
-        
+        }  
     },
-    created(){
-        // this.fetchTransactions()
-        var that = this
-
-        async function func(){
-            console.log(that.transactions);
-            
-            return await getDocs(collection(db, "transactions"))
-            .then( docs => docs.forEach((doc) => {
-                that.transactions.push(doc.data());}))
-                }
-        
-        func() 
+    computed: mapGetters(['allTransactions']),
+    async created(){
+        this.fetchTransactions()     
     },
-    mounted(){       
+    mounted(){    
     },
     methods: {
-        // fetchTransactions(){
-        //     // console.log('generate transactions')
-        //     axios.get('cards.json')
-        //         .then((result) => {
-        //             // console.log(result.data.transactions)
-        //             this.transactions = result.data.transactions
-        //             //  console.log(this.transactions)
-        //         } );
-        // },
-        addTransaction(){
-            console.log('add transactions')
+        ...mapActions(['fetchTransactions']),
+        addTransaction(payload){
+            this.$emit('new-transaction', payload)
+            console.log('new transaction from Operations')
+            
 
-            var that = this
+            // var that = this
 
-            async function func(){
-                console.log(that.transactions);
+            // async function func(){
+            //     console.log(that.transactions);
 
-                return await setDoc(doc(db, "transactions", "ID"), {///здесь нужно передать именно те параметры куда нажали, и нужо вообще эту функцию прописать в другое есто
-                    company: that.transaction.company,
-                    sum: that.transaction.sum,
-                    date: that.transaction.date
-                    })
+            //     return await setDoc(doc(db, "transactions", "ID"), {///здесь нужно передать именно те параметры куда нажали, и нужо вообще эту функцию прописать в другое есто
+            //         company: that.transaction.company,
+            //         sum: that.transaction.sum,
+            //         date: that.transaction.date
+            //         })
+
+
+
                 
                 // return await getDocs(collection(db, "transactions"))
                 // .then( docs => docs.forEach((doc) => {
                 //     that.transactions.push(doc.data());}))
-                    }
+                    // }
             
-            func() 
+            // func() 
 
-        }
+        },
+        
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
-.operations {
-        width: 50%;
-        display: inline-block;
-        background-color: #ff5252;
-        /* float: left; */
+</style>>
 
-    }
-</style>

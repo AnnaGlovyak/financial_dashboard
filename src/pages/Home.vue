@@ -1,10 +1,13 @@
 <template>
   <div class="home">
     <!-- <Aside/> -->
-    <Cards/>
+    <Cards 
+    @do-fats-payment="doFatsPayment"/>
     <div class="home__analytics">
       <div class="analytics__content">
-        <Operations/>
+      <Operations
+      @new-transaction="newTransaction"
+      />
       <Analytics/>
       </div>
       
@@ -19,7 +22,7 @@
 import Cards from '@/components/Cards.vue'
 import Analytics from '@/components/Analytics.vue'
 import Operations from '@/components/Operations.vue'
-import Aside from '@/components/Aside.vue'
+// import Aside from '@/components/Aside.vue'
 
 export default {
   props: ['transactions'],
@@ -28,7 +31,16 @@ export default {
     Cards,
     Analytics,
     Operations,
-    Aside,
+    // Aside,
+  },
+  methods: {
+    doFatsPayment(payload){
+            console.log('doFatsPayment', payload);
+    },
+    newTransaction(){
+      console.log('newPayment from Home');
+      console.log(this.transactions);
+    }
   }
 }
 </script>
@@ -37,6 +49,7 @@ export default {
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;
+    background: #F2F3F7;
   }
   .analytics__content{
     max-width: 1200px;

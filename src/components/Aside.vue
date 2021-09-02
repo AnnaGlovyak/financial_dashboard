@@ -1,9 +1,11 @@
 <template>
-    <div class="aside" :class="{'show-menu': menuOpen}">
-        <md-list>
-            <md-list-item @click="menuOpen = !menuOpen">
-                <md-icon>menu</md-icon>
-                <span class="md-list-item-text"></span>
+     <div class="aside" >
+         <md-icon>menu</md-icon>
+                <span class="md-list-item-text" @click="menuOpen = !menuOpen">menu</span>
+          <!--:class="{'show-menu': menuOpen}" -->
+        <md-list class="aside-menu" :class="{'show-menu': menuOpen}">
+            <md-list-item >
+                
             </md-list-item>
                 <md-list-item  to="/about">
                 <md-icon>business</md-icon>
@@ -14,7 +16,7 @@
                 <span class="md-list-item-text">whish list</span>
             </md-list-item>
         </md-list>
-        <button @click="logout">Log out</button>
+        <!-- <button @click="logout">Log out</button> -->
     </div>
 </template>
 
@@ -23,10 +25,18 @@
 // import Cards from '@/components/Cards.vue'
 
 export default {
-  name: 'Aside',
-  components: {
+    data(){
+        return {
+            menuOpen: true
+        }
+    },
+    
+    name: 'Aside',
+
+    components: {
     // Cards,
   }
+
 }
 </script>
 
@@ -34,6 +44,10 @@ export default {
     /* .aside {
         display: flex;
     } */
+    .show-menu{
+        display: none;
+    }
+    
     .aside {
         display: flex;
         justify-content: flex-start;
