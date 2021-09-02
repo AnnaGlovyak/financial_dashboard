@@ -1,0 +1,51 @@
+{
+    "cards": [
+        {
+            "id": "4991355787699056",
+            "password": "password",
+            "name": "visa",
+            "currency": "usd",
+            "total": "12340",
+            "holder": "Ivan" 
+        },
+        {
+            "id": "5555355787699056",
+            "password": "password",
+            "name": "master card",
+            "currency": "eur",
+            "total": "15000",
+            "holder": "Ivan"
+        },
+        {
+            "id": "4966778787699056",
+            "password": "password",
+            "name": "visa",
+            "currency": "btc",
+            "total": "300000",
+            "holder": "Ivan"
+        }],
+    "transactions": [
+        {
+            "number": "1",
+            "cardId": "4991355787699056",
+            "company": "Apple shop",
+            "sum": "500",
+            "date": "15-03-2021"
+        },
+        {
+            "number": "2",
+            "cardId": "4991355787699056",
+            "company": "Starbucs Cafe",
+            "sum": "14000",
+            "date": "22-03-2021"
+        },
+        {
+            "number": "3",
+            "cardId": "5555355787699056",
+            "company": "Pharmacy",
+            "sum": "300",
+            "date": "22-03-2021"
+        }
+    ]
+
+}
