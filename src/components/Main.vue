@@ -9,7 +9,6 @@
 <style scoped>
     .main {
         /* background-color: rgb(197, 197, 247); */
-        height: 1100px;
         max-width: 1600px;
         width: 100%;
         margin: 0 auto;

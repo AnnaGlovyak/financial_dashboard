@@ -39,28 +39,42 @@
 
     &__item{
         display: flex;
-        height: 30px;
+        height: 55px;
         align-content: center;
         width: 100%;
+        border-bottom: 1px solid #F2F3F7;
+    }
+
+    &__card-info{
+        width: 33%;
+        display: flex;
     }
 
     &__date{
-        width: 10%;
         font-family: Inter;
         font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
+        font-weight: normal;
+        font-size: 12px;
         line-height: 16px;
-        letter-spacing: -0.009em;
-        color: #2E2E3A;
+        color: #70707C;
     }
 
-    &__card{
-        width: 15%;
+    // &__card{
+    //     width: 15%;
+    // }
+
+    &__number{
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        color: #9A9AAF;
     }
 
     &__company{
-        width: 25%;
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
@@ -70,8 +84,11 @@
         color: #2E2E3A;
     }
 
+    &__category{
+        width: 33%;
+    }
+
     &__department{
-        width: 25%;
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -83,15 +100,16 @@
     }
 
     &__sum{
-        width: 25%;
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 16px;
-        line-height: 16px;
-        text-align: right;
-        letter-spacing: -0.009em;
+        font-size: 18px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
         color: #2E2E3A;
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
