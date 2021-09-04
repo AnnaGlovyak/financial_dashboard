@@ -7,9 +7,9 @@
                     <button class="button--addCard">+ Add card</button>
                 </div>
                 <div class="content">
-                    <select name="popular" id="popular" class="button--popular">
+                    <!-- <select name="popular" id="popular" class="button--popular">
                         <option value="popular" class="button--option">popular</option>
-                    </select>
+                    </select> -->
                 </div>
             </header>  
             <ul class="cards-list">
@@ -60,18 +60,21 @@
                     <p class="info-list__computed-date">Compared to $890 last month</p>
                 </li>
             </ul>
-            <ul class="fast-payment">
+            <div class="fast-payment">
                 <div class="fast-payment__title">Fast payment</div>
                 <!-- <md-button class="md-primary md-raised" @click="showDialog = true">Show Dialog</md-button> -->
                 <button class="fast-payment__button payment" @click="showDialog = true">+</button>
-                <li v-for="(payment, index) in allPayments" :key="payment.id" @click="clickFastPayment(payment)">
-                    <div class="payment">
-                        <span class="payment__point" v-bind:style="{ 'background-color': paymentColor[index]}"></span>
-                        <span class="payment__name">{{ payment.name }} - </span>
-                        <span class="payment__sum">{{ payment.sum }}</span>
-                    </div>
-                </li>
-            </ul>
+                <ul class="fast-payment__list">
+                    <li v-for="(payment, index) in allPayments" :key="payment.id" @click="clickFastPayment(payment)">
+                        <div class="payment">
+                            <span class="payment__point" v-bind:style="{ 'background-color': paymentColor[index]}"></span>
+                            <span class="payment__name">{{ payment.name }}</span>
+                            <span class="payment__sum">{{ payment.sum }}</span>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
             <div>
                 <md-dialog :md-active.sync="showDialog">
                     <md-dialog-title>New payment</md-dialog-title>
@@ -113,7 +116,7 @@ export default {
             showDialog: false, 
             selectDepartment: null,
             selectCard: null,
-            paymentColor: ['red', 'blue','yellow', 'green', 'pinc']
+            paymentColor: ['red', 'blue', 'coral','yellow', 'green', 'pink','aqua', 'blueviolet', 'brown', 'chocolate', 'grey', 'crimson']
             }      
     },
     computed: mapGetters(['allCards', 'allPayments']),

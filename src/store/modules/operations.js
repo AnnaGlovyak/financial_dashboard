@@ -1,5 +1,5 @@
 import { db } from '../../main.js'
-import { collection, getDocs, doc, setDoc, Timestamp} from "firebase/firestore"; 
+import { collection, getDocs, doc, setDoc, Timestamp, orderBy, limit, query} from "firebase/firestore"; 
 
 export default {
     state: {
@@ -13,9 +13,11 @@ export default {
     actions: {
         async fetchTransactions(context){
             let transactions = []
-            await getDocs(collection(db, "transactions"))
+            const q = query(collection(db, "transactions"), orderBy("date", "desc"), limit(15));
+            await getDocs(q)
             .then( docs => docs.forEach((doc) => {
-                transactions.push(doc.data());}));
+                    transactions.push(doc.data());}));
+                context.commit('updateTransactions', transactions)
             context.commit('updateTransactions', transactions)
         },
         async clickFastPayment({commit, dispatch}, newTransaction){

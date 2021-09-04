@@ -1,11 +1,12 @@
 .operations{ 
     max-width: 1600px;
     width: 100%;
+    height: 100%;
     background: #F2F3F7;
     margin: 0 auto;
 
     &__content{
-        max-width: 1600px;
+        max-width: 1200px;
         width: 100%;
         margin: 0 auto;
         display: flex;
@@ -15,7 +16,7 @@
 }
 
 .transactions {
-    width: 60%;
+    width: 55%;
     display: flex;
     flex-direction: column;
     padding: 28px 30px;
@@ -40,30 +41,26 @@
     &__item{
         display: flex;
         height: 55px;
-        align-content: center;
+        align-items: center;
         width: 100%;
         border-bottom: 1px solid #F2F3F7;
     }
 
-    &__card-info{
-        width: 33%;
+    &__direction{
         display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 20px;
     }
 
-    &__date{
-        font-family: Inter;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 16px;
-        color: #70707C;
+    &__card-info{
+        width: 30%;
+        height: 26px;
+        display: flex;
+        align-items: center;
     }
 
-    // &__card{
-    //     width: 15%;
-    // }
-
-    &__number{
+    &__card-number{
         font-family: Inter;
         font-style: normal;
         font-weight: normal;
@@ -73,6 +70,31 @@
         align-items: center;
         color: #9A9AAF;
     }
+
+    &__card-logo{
+        width: 25px;  
+    }
+
+    &__card-logo-conteiner{
+        width: 43px;
+        height: 26px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    &__date{
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #70707C;
+        padding-top: 5px;
+    }
+
+    // &__card{
+    //     width: 15%;
+    // }
 
     &__company{
         font-family: Inter;
@@ -85,7 +107,8 @@
     }
 
     &__category{
-        width: 33%;
+        width: 50%;
+        display: flex;
     }
 
     &__department{
@@ -106,21 +129,59 @@
         font-size: 18px;
         line-height: 22px;
         display: flex;
-        align-items: center;
+        width: 20%;
         color: #2E2E3A;
         display: flex;
         justify-content: flex-end;
     }
 }
 
+.button--popular {
+    padding: 0 10px;
+    width: 130px;
+    height: 36px;
+    border: none;
+    background-color: #F2F3F7;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.009em;
+    color: #16161E;
+}
+.button--option {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height, or 100% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.009em;
+
+    /* White Theme / Gray - 10 */
+
+    color: #16161E;
+}
+
 .statistic{
-    width: 35%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     padding: 28px 30px;
     background: #FFFFFF;
     box-shadow: 0px 100px 80px rgba(199, 203, 217, 0.07), 0px 41.7776px 33.4221px rgba(199, 203, 217, 0.0503198), 0px 22.3363px 17.869px rgba(199, 203, 217, 0.0417275), 0px 12.5216px 10.0172px rgba(199, 203, 217, 0.035), 0px 6.6501px 5.32008px rgba(199, 203, 217, 0.0282725), 0px 2.76726px 2.21381px rgba(199, 203, 217, 0.0196802);
     border-radius: 20px;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
 
     &__title{
         font-family: Inter;
@@ -132,4 +193,3 @@
         align-self: flex-start;
     }
 }
-

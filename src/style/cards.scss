@@ -70,18 +70,7 @@ button {
     margin: 0px 12px;
     margin: 0px 24px;
 }
-.button--popular {
-    padding: 9px 20px;
-    width: 130px;
-    height: 36px;
-    border: none;
-}
-.button--option {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 16px;
-}
+
 .cards-list {
     display: flex;
     list-style: none;
@@ -175,6 +164,35 @@ button {
         transform: translate(0, -50%);
     }
 }
+.payment{
+    display: flex;
+    min-width: 180px;
+    padding: 10px 20px;
+    background: #FFFFFF;
+    border-radius: 100px;
+    padding: 10px 16px;
+    border: none;
+    align-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+
+    &__point{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+
+    &__sum{
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #2E2E3A;
+        margin-left: 10px;
+    }
+}
 
 .fast-payment {
     display: flex;
@@ -189,6 +207,23 @@ button {
     height: 98px;
     border-top: 1px solid #E2E2EA;
 
+    &__list{
+        max-width: 850px;
+        width: 100%;
+        padding: 0;
+        // padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: scroll;
+    }
+
+    ::-webkit-scrollbar { /* chrome based */
+        width: 0px;  /* ширина scrollbar'a */
+        height: 0px;
+        background: transparent;  /* опционально */
+    }
+
     &__title {
         font-style: normal;
         font-weight: 600;
@@ -198,6 +233,7 @@ button {
 
     &__button {
         cursor: pointer;
+        min-width: 40px;
         width: 40px;
         height: 40px;
         text-align: center;
@@ -264,31 +300,5 @@ button {
         font-size: 14px;
         line-height: 16px;
         color: #656575;
-    }
-}
-.payment{
-    display: flex;
-    padding: 10px 20px;
-    background: #FFFFFF;
-    border-radius: 100px;
-    padding: 10px 16px;
-    border: none;
-    align-items: center;
-
-    &__point{
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 20px;
-    }
-
-    &__sum{
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 16px;
-        color: #2E2E3A;
-        margin-left: 10px;
     }
 }
