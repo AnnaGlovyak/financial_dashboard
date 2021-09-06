@@ -24,6 +24,11 @@
     box-shadow: 0px 100px 80px rgba(199, 203, 217, 0.07), 0px 41.7776px 33.4221px rgba(199, 203, 217, 0.0503198), 0px 22.3363px 17.869px rgba(199, 203, 217, 0.0417275), 0px 12.5216px 10.0172px rgba(199, 203, 217, 0.035), 0px 6.6501px 5.32008px rgba(199, 203, 217, 0.0282725), 0px 2.76726px 2.21381px rgba(199, 203, 217, 0.0196802);
     border-radius: 20px;
 
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
+
     &__title{
         font-family: Inter;
         font-style: normal;
@@ -36,6 +41,13 @@
 
     &__list{
         padding-top: 30px;
+        max-height: 470px;
+        overflow: auto;
+    }
+    ::-webkit-scrollbar { /* chrome based */
+        width: 0px;  /* ширина scrollbar'a */
+        height: 0px;
+        background: transparent;  /* опционально */
     }
 
     &__item{
@@ -134,6 +146,31 @@
         display: flex;
         justify-content: flex-end;
     }
+
+    &__button-load{
+        padding: 7px;
+        width: 32px;
+        height: 32px;
+        left: 40px;
+        top: 32px;
+        background: #F2F3F7;
+        border-radius: 6px;
+        margin: 0px 8px;
+        cursor: pointer;
+    }
+
+    &__button-more{
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #24CA49;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        margin: 30px;
+    }
 }
 
 .button--popular {
@@ -191,5 +228,10 @@
         line-height: 34px;
         color: #2E2E3A;
         align-self: flex-start;
+    }
+
+    &__chart{
+        max-width: 350px;
+        margin-top: 40px;
     }
 }

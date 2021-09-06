@@ -4,7 +4,7 @@
             <header class="cards__header">
                 <div class="content">
                     <h2 class="page__title">Overview</h2>
-                    <button class="button--addCard">+ Add card</button>
+                    <button class="button--addCard" @click="showDialogCard = true">+ Add card</button>
                 </div>
                 <div class="content">
                     <!-- <select name="popular" id="popular" class="button--popular">
@@ -75,28 +75,74 @@
                 </ul>
                 
             </div>
-            <div>
-                <md-dialog :md-active.sync="showDialog">
-                    <md-dialog-title>New payment</md-dialog-title>
-                        <label>Input type of payment</label>
-                        <input type="text" v-model="typePayment" required>
-                        <select name="selectDepartment" id="selectDepartment" v-on:change="selectOptionDepartment">Department
-                            <option value="Close"> Close </option>
-                            <option value="Events"> Events </option>
-                            <option value="Cafe"> Cafe </option>
-                            <option value="Shop"> Shop </option>
-                            <option value="Food"> Food </option>
-                            <option value="Other"> Other </option>
+            <div><!--dialog for payments-->
+                <md-dialog :md-active.sync="showDialog" class="cards__modal modal">
+                    <md-dialog-title class="modal__title">New payment</md-dialog-title>
+                    <div class="modal__conteiner">
+                        <label class="modal__input-label">Input name of payment</label>
+                        <input type="text" v-model="typePayment" required class="modal__input">
+                        
+                        <select class="modal__select" name="selectDepartment" id="selectDepartment" v-on:change="selectOptionDepartment" required>
+                            <option value="" disabled selected hidden>Choose category</option>
+                            <option class="modal__option" value="Cafe"> Cafe </option>
+                            <option class="modal__option" value="Shop"> Shop </option>
+                            <option class="modal__option" value="Food"> Food </option>
+                            <option class="modal__option" value="Other"> Other </option>
                         </select>
-                        <label>Input sum</label>
-                        <input type="text" v-model="sumPayment" required>
-                        <select name="selectCard" id="selectCard" v-on:change="selectOptionCard">From card
-                            <option v-for="card in allCards" :key="card.number" :value="card.number"> {{ card.name }}, {{ card.currency }}, {{ card.total }}</option>
+                        <label class="modal__input-label">Input sum</label>
+                        <input type="text" v-model="sumPayment" required class="modal__input">
+                        <select class="modal__select" name="selectCard" id="selectCard" v-on:change="selectOptionCard" required>
+                            <option value="" disabled selected hidden>Choose card</option>
+                            <option class="modal__option" v-for="card in allCards" :key="card.number" :value="card.number"> {{ card.name }}, {{ card.currency }}, {{ card.total }}</option>
                         </select>
+                    </div>
+                        
 
                     <md-dialog-actions>
                         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
                         <md-button class="md-primary" @click="addPayment()">Save</md-button>
+                    </md-dialog-actions>
+                </md-dialog>  
+            </div>
+            <div><!-- dialog for new card -->
+                <md-dialog :md-active.sync="showDialogCard" class="cards__modal modal">
+                    <md-dialog-title class="modal__title">Create new card</md-dialog-title>
+                    <div class="modal__conteiner">
+                        <label class="modal__input-label">Input card number</label>
+                        <input type="text" v-model="newCardNumber" required class="modal__input">
+                        <label class="modal__input-label">Input card password</label>
+                        <input type="text" v-model="newCardPassword" required class="modal__input">
+                        <select class="modal__select" name="selectNewCardCurrency" id="selectNewCardCurrency" v-on:change="selectOptionNewCardCurrency" required>
+                            <option value="" disabled selected hidden>Choose currency</option>
+                            <option class="modal__option" value="rub"> rub </option>
+                            <option class="modal__option" value="usd"> usd </option>
+                            <option class="modal__option" value="eur"> eur </option>
+                        </select>
+                        <select class="modal__select" name="selectNewCardType" id="selectNewCardType" v-on:change="selectOptionNewCardType" required>
+                            <option value="" disabled selected hidden>Choose card type</option>
+                            <option class="modal__option" value="debit"> debit </option>
+                            <option class="modal__option" value="saving"> saving </option>
+                            <option class="modal__option" value="credit"> credit </option>
+                        </select>
+                        <select class="modal__select" name="selectNewCardName" id="selectNewCardName" v-on:change="selectOptionNewCardName" required>
+                            <option value="" disabled selected hidden>Choose card name</option>
+                            <option class="modal__option" value="master card"> master card </option>
+                            <option class="modal__option" value="viza"> viza </option>
+                        </select>
+                        <label class="modal__input-label">Input holder</label>
+                        <input type="text" v-model="newCardHolder" required class="modal__input">
+                        <label class="modal__input-label">Input total sum</label>
+                        <input type="text" v-model="newCardTotal" required class="modal__input">
+                        <!-- <select class="modal__select" name="selectCard" id="selectCard" v-on:change="selectOptionCard" required>
+                            <option value="" disabled selected hidden>Choose card</option>
+                            <option class="modal__option" v-for="card in allCards" :key="card.number" :value="card.number"> {{ card.name }}, {{ card.currency }}, {{ card.total }}</option>
+                        </select> -->
+                    </div>
+                        
+
+                    <md-dialog-actions>
+                        <md-button class="md-primary" @click="showDialogCard = false">Close</md-button>
+                        <md-button class="md-primary" @click="addNewCard()">Add</md-button>
                     </md-dialog-actions>
                 </md-dialog>  
             </div>
@@ -114,10 +160,20 @@ export default {
             typePayment: null,
             sumPayment: null, 
             showDialog: false, 
+            showDialogCard: false,
             selectDepartment: null,
             selectCard: null,
+
+            newCardNumber: null,
+            newCardPassword: null,
+            newCardCurrency: null,
+            newCardType: null,
+            newCardName: null,
+            newCardHolder: null,
+            newCardTotal: 0,
+
             paymentColor: ['red', 'blue', 'coral','yellow', 'green', 'pink','aqua', 'blueviolet', 'brown', 'chocolate', 'grey', 'crimson']
-            }      
+            }     
     },
     computed: mapGetters(['allCards', 'allPayments']),
     async created(){
@@ -128,14 +184,14 @@ export default {
         // this.$store.dispatch('fetchCards')
     },
     methods: {
-        ...mapActions(['fetchCards', 'fetchPayments', 'clickFastPayment', 'addPaymentFromDialog']),
+        ...mapActions(['fetchCards', 'fetchPayments', 'clickFastPayment', 'addPaymentFromDialog', 'addCard']),
         createCard(){
         },
         addPayment(){
             this.showDialog = true;
             let payment = {};
             payment.name = this.typePayment;
-            payment.sum = this.sumPayment;
+            payment.sum = Number(this.sumPayment);
             payment.cardNumber = this.selectCard;
             payment.department = this.selectDepartment;
             payment.paymentid = 10;
@@ -146,6 +202,26 @@ export default {
              }
              else alert('Please, fill the form!');
         },
+        addNewCard(){
+            this.showDialogCard = true;
+            let newCard = {};
+            newCard.number = this.newCardNumber,
+            newCard.password = this.newCardPassword,
+            newCard.currency = this.newCardCurrency,
+            newCard.type = this.newCardType,
+            newCard.name = this.newCardName,
+            newCard.holder = this.newCardHolder,
+            newCard.total = Number(this.newCardTotal)
+
+            if(this.newCardType == 'viza'){
+                newCard.logo = '../assets/viza.png'
+            } else {
+                newCard.logo = '../assets/master-card.png'
+            }
+            this.addCard(newCard);
+            this.showDialogCard = false
+
+        },
         selectOptionDepartment: function(e){
             this.selectDepartment = e.target.value;
             return this.selectDepartment;
@@ -153,6 +229,18 @@ export default {
         selectOptionCard: function(e){
             this.selectCard = e.target.value;
             return this.selectCard;
+        },
+        selectOptionNewCardCurrency: function(e){
+            this.newCardCurrency = e.target.value;
+            return this.newCardCurrency;
+        },
+        selectOptionNewCardType: function(e){
+            this.newCardType = e.target.value;
+            return this.newCardType;
+        },
+        selectOptionNewCardName: function(e){
+            this.newCardName = e.target.value;
+            return this.newCardName;
         }
     }
 }

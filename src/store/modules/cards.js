@@ -30,13 +30,6 @@ export default {
                 payments.push(doc.data());}));
             context.commit('updatePayments', payments)
         },
-        // addPaymentFromDialog(context, payment){
-        //     let payments = []
-        //     console.log('Hi from Vuex Payment', payment)
-        //     console.log(payments)
-        //     payments.push(payment)
-        //     context.commit('updatePayments', payments)
-        // },
         async addPaymentFromDialog({commit, dispatch}, payment){
             let ID =  await dispatch('idGenerator');
             console.log(ID)
@@ -49,6 +42,22 @@ export default {
             dispatch('fetchPayments')
             commit('updatePayments')
         },
+        async addCard({commit, dispatch}, newCard){
+            console.log('Hi from addCard')
+            let ID = await dispatch('idGenerator')
+            await setDoc(doc(db, "cards", ID), {
+                currency: newCard.currency,
+                holder: newCard.holder,
+                logo: newCard.logo,
+                name: newCard.name,
+                number: newCard.number,
+                password: newCard.password,
+                total: newCard.total,
+                type: newCard.type
+                })
+            dispatch('fetchCards')
+            commit('updateCards')
+        }
     },
     mutations: {
         updateCards(state, cards){

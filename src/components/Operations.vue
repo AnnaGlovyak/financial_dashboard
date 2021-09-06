@@ -44,7 +44,9 @@
                         </div>
                         <div class="transactions__sum">{{ transaction.sum }}</div>
                     </li>
+                    <button @click="moreTransactions(3)" class="transactions__button-more">Load more</button>
                 </ul>
+                
             </div>
             <div class="statistic">
                 <div class="statistic__header">
@@ -54,6 +56,10 @@
                         <option value="popular" class="button--option">categories</option>
                     </select>
                 </div>
+                <div class="statistic__chart">
+                   <!-- <doughnut-chart :chartdata="chartData" :options="chartOptions"/> -->
+                    <canvas ref="canvas"></canvas>
+                </div>
             </div>
         </div> 
     </div>
@@ -62,10 +68,13 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
+// import PieChart from '../charts/PieChart'
+import { Doughnut } from 'vue-chartjs'
 
 export default {
-    
+    extends: Doughnut,
     data(){
+       
         return{
             showDialog: false,
             depImg: '',
@@ -86,7 +95,8 @@ export default {
                     name: 'Food',
                     src: '../assets/food.png'
                 },
-            ]
+            ],
+            n: 6
 
         }  
     },
@@ -128,18 +138,62 @@ export default {
            
     },
     async mounted(){     
-        this.fetchTransactions() 
+        this.fetchTransactions(),
+        this.setupChart(this.departmentImages);
     },
     async update(){
-        this.fetchTransactions()
+        this.fetchTransactions(),
+        this.setupChart(this.departmentImages);
     },
     methods: {
         ...mapActions(['fetchTransactions', 'idGenerator']),
+
         addTransaction(payload){
             this.$emit('new-transaction', payload)
             console.log('new transaction from Operations')
         },
-        
+        setupChart(departmentImages){
+            this.renderChart({
+                labels: departmentImages.map(department => department.name),
+                datasets: [{
+                    label: 'Total expenses',
+                    data: departmentImages.map(d => {
+                        return this.allTransactions.reduce((total, tr) => {
+                            if(tr.department === d.name){
+                                total += tr.sum
+                            } return total
+                        }, 0)
+                    }),
+                    backgroundColor: [
+                        'rgba(10, 175, 125, 1)',
+                        'rgba(10, 175, 255, 1)',
+                        'rgba(255, 122, 47, 1)',
+                        'rgba(161, 98, 247, 1)'
+                    ],
+                    // borderWidth: 1,
+
+                }],
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                        position: 'bottom',
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 50
+                        }
+                    }
+                    
+                }
+            })
+        },
+        moreTransactions(b){
+            console.log('moreTransactions')
+            this.n = this.n + b;
+            this.fetchTransactions(this.n)
+        }
     }
 }
 </script>

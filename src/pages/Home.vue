@@ -8,7 +8,7 @@
       <Operations
       @new-transaction="newTransaction"
       />
-      <Analytics/>
+      
       </div>
       
     </div>
@@ -20,18 +20,14 @@
 <script>
 
 import Cards from '@/components/Cards.vue'
-import Analytics from '@/components/Analytics.vue'
 import Operations from '@/components/Operations.vue'
-// import Aside from '@/components/Aside.vue'
 
 export default {
   props: ['transactions'],
   name: 'Home',
   components: {
     Cards,
-    Analytics,
     Operations,
-    // Aside,
   },
   methods: {
     doFatsPayment(payload){
@@ -45,7 +41,8 @@ export default {
 }
 </script>
 <style scoped>
-  .home__analytics{
+
+  /* .home__analytics{
     max-width: 1600px;
     width: 100%;
     margin: 0 auto;
@@ -55,5 +52,5 @@ export default {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-  }
+  } */
 </style>
