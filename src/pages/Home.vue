@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <md-progress-spinner :md-diameter="60" :md-stroke="5" md-mode="indeterminate"  v-if="!allCards"></md-progress-spinner>
     <!-- <Aside/> -->
     <Cards 
     @do-fats-payment="doFatsPayment"/>
@@ -10,10 +11,7 @@
       />
       
       </div>
-      
     </div>
-    
-    
   </div>
 </template>
 
@@ -21,6 +19,7 @@
 
 import Cards from '@/components/Cards.vue'
 import Operations from '@/components/Operations.vue'
+import {mapGetters} from 'vuex'
 
 export default {
   props: ['transactions'],
@@ -29,6 +28,7 @@ export default {
     Cards,
     Operations,
   },
+  computed: mapGetters(['allCards']),
   methods: {
     doFatsPayment(payload){
             console.log('doFatsPayment', payload);
@@ -42,15 +42,15 @@ export default {
 </script>
 <style scoped>
 
-  /* .home__analytics{
-    max-width: 1600px;
-    width: 100%;
-    margin: 0 auto;
-    background: #F2F3F7;
+.md-progress-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
   }
-  .analytics__content{
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
+
+  /* .operations{
+    background: transparent;
   } */
 </style>

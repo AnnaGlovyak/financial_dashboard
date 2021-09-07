@@ -2,7 +2,7 @@
     <div class="operations">
         <div class="operations__content">
             <div class="transactions">
-                <h2 class="transactions__title">Last transaction</h2>
+                <h2 class="transactions__title">Last transaction  {{ loading }}</h2>
                 <ul class="transactions__list">
                     <li class="transactions__item" v-for="(transaction, index) in allTransactions" :key="transaction.number">
                         <div class="transactions__category">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="transactions__sum">{{ transaction.sum }}</div>
                     </li>
-                    <button @click="moreTransactions(3)" class="transactions__button-more">Load more</button>
+                    <!-- <button @click="moreTransactions(3)" class="transactions__button-more">Load more</button> -->
                 </ul>
                 
             </div>
@@ -56,7 +56,7 @@
                         <option value="popular" class="button--option">categories</option>
                     </select>
                 </div>
-                <div class="statistic__chart">
+                <div class="statistic__chart" >
                    <!-- <doughnut-chart :chartdata="chartData" :options="chartOptions"/> -->
                     <canvas ref="canvas"></canvas>
                 </div>
@@ -68,7 +68,6 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
-// import PieChart from '../charts/PieChart'
 import { Doughnut } from 'vue-chartjs'
 
 export default {
@@ -96,12 +95,11 @@ export default {
                     src: '../assets/food.png'
                 },
             ],
-            n: 6
-
+            n: 6,
         }  
     },
     computed: {
-        ...mapGetters(['allTransactions', 'allCards']),
+        ...mapGetters(['allTransactions', 'allCards', 'loading']),
         showCardLogo(){
             let arr = [];
             for(let i = 0; i < this.allTransactions.length; i++){
@@ -138,12 +136,8 @@ export default {
            
     },
     async mounted(){     
-        this.fetchTransactions(),
-        this.setupChart(this.departmentImages);
-    },
-    async update(){
-        this.fetchTransactions(),
-        this.setupChart(this.departmentImages);
+        await this.fetchTransactions(),
+        await this.setupChart(this.departmentImages);
     },
     methods: {
         ...mapActions(['fetchTransactions', 'idGenerator']),
@@ -153,7 +147,8 @@ export default {
             console.log('new transaction from Operations')
         },
         setupChart(departmentImages){
-            this.renderChart({
+            if(this.loading){
+                this.renderChart({
                 labels: departmentImages.map(department => department.name),
                 datasets: [{
                     label: 'Total expenses',
@@ -188,6 +183,8 @@ export default {
                     
                 }
             })
+            }
+            
         },
         moreTransactions(b){
             console.log('moreTransactions')

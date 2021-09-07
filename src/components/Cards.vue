@@ -7,9 +7,6 @@
                     <button class="button--addCard" @click="showDialogCard = true">+ Add card</button>
                 </div>
                 <div class="content">
-                    <!-- <select name="popular" id="popular" class="button--popular">
-                        <option value="popular" class="button--option">popular</option>
-                    </select> -->
                 </div>
             </header>  
             <ul class="cards-list">
@@ -26,15 +23,7 @@
                     <div class="card__holder">Card holder <span class="card__holder--name">{{ card.holder }}</span></div>
                 </li>
             </ul>
-            <ul class="info-list">
-                <li class="info-list__item">
-                    <p class="info-list__title">Income</p>
-                    <div class="info-list__cash">
-                        <p class="info-list__sum">$32,134</p>
-                        <p class="info-list__trend">↑2.5%</p>
-                    </div>
-                    <p class="info-list__computed-date">Compared to $890 last month</p>
-                </li>
+            <ul class="info-list" v-if="allCurrency">
                 <li class="info-list__item">
                     <p class="info-list__title">Spend this week</p>
                     <div class="info-list__cash">
@@ -51,19 +40,34 @@
                     </div>
                     <p class="info-list__computed-date">Compared to $890 last month</p>
                 </li>
-                <li class="info-list__item">
-                    <p class="info-list__title">Spending trend</p>
-                    <div class="info-list__cash">
-                        <p class="info-list__sum">87%</p>
-                        <p class="info-list__trend">+4.5%</p>
+                <li class="info-list__currency-table">
+                    <div class="info-list__currency" v-for="currency in allCurrency" :key="currency.id">
+                        <!-- <p class="info-list__title">Spending trend</p> -->
+                        <p class="info-list__currency-name">{{ currency.ccy + ' / ' + currency.base_ccy}}</p>
+                        <div class="info-list__currency-price">
+                            <p class="info-list__currency-price--buy">{{ currency.buy.substring(0,5) }}</p>
+                            <div>
+                                <div></div>
+                                <p class="info-list__computed-date">sale <span class="info-list__currency-price--sale">{{ currency.sale.substring(0,5) }}</span></p>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
-                    <p class="info-list__computed-date">Compared to $890 last month</p>
+                    <!-- <div class="info-list__item">
+                        <p class="info-list__title">Income</p>
+                        <div class="info-list__cash">
+                            <p class="info-list__sum">$32,134</p>
+                            <p class="info-list__trend">↑2.5%</p>
+                        </div>
+                        <p class="info-list__computed-date">Compared to $890 last month</p>
+                    </div> -->
                 </li>
             </ul>
             <div class="fast-payment">
                 <div class="fast-payment__title">Fast payment</div>
                 <!-- <md-button class="md-primary md-raised" @click="showDialog = true">Show Dialog</md-button> -->
-                <button class="fast-payment__button payment" @click="showDialog = true">+</button>
+                <button class="fast-payment__button" @click="showDialog = true">+</button>
                 <ul class="fast-payment__list">
                     <li v-for="(payment, index) in allPayments" :key="payment.id" @click="clickFastPayment(payment)">
                         <div class="payment">
@@ -85,7 +89,7 @@
                         <select class="modal__select" name="selectDepartment" id="selectDepartment" v-on:change="selectOptionDepartment" required>
                             <option value="" disabled selected hidden>Choose category</option>
                             <option class="modal__option" value="Cafe"> Cafe </option>
-                            <option class="modal__option" value="Shop"> Shop </option>
+                            <option class="modal__option" value="Pharmacy"> Pharmacy </option>
                             <option class="modal__option" value="Food"> Food </option>
                             <option class="modal__option" value="Other"> Other </option>
                         </select>
@@ -155,6 +159,7 @@
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
+    name: 'ProgressSpinnerSizes',
     data() {
         return {
             typePayment: null,
@@ -175,16 +180,19 @@ export default {
             paymentColor: ['red', 'blue', 'coral','yellow', 'green', 'pink','aqua', 'blueviolet', 'brown', 'chocolate', 'grey', 'crimson']
             }     
     },
-    computed: mapGetters(['allCards', 'allPayments']),
-    async created(){
+    computed: mapGetters(['allCards', 'allPayments','allCurrency']),
+    created(){
         this.fetchCards();
         this.fetchPayments();
+        this.getCurrency()
+        console.log(this.allCurrency)
     },
     mounted(){
         // this.$store.dispatch('fetchCards')
+        
     },
     methods: {
-        ...mapActions(['fetchCards', 'fetchPayments', 'clickFastPayment', 'addPaymentFromDialog', 'addCard']),
+        ...mapActions(['fetchCards', 'fetchPayments', 'clickFastPayment', 'addPaymentFromDialog', 'addCard','getCurrency']),
         createCard(){
         },
         addPayment(){
@@ -247,5 +255,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .modal{
+        display: flex;
+    }
+    
 
 </style>

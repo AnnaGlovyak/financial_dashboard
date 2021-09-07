@@ -4,23 +4,29 @@ import { collection, getDocs, doc, setDoc, Timestamp, orderBy, limit, query, whe
 
 export default {
     state: {
-        transactions: []
+        transactions: [],
+        loading: false
     },
     getters: {
         allTransactions(state){
             return state.transactions
+        },
+        loading(state){
+            return state.loading
         }
     },
     actions: {
-        async fetchTransactions({commit, dispatch}, col = 7){
+        async fetchTransactions({commit, dispatch}){
+            
             await dispatch('fetchCards');
             let transactions = []
-            const q = query(collection(db, "transactions"), orderBy("date", "desc"), limit(col));
+            const q = query(collection(db, "transactions"), orderBy("date", "desc"), limit());
             await getDocs(q)
             .then( docs => docs.forEach((doc) => {
                     transactions.push(doc.data());}));
             commit('updateTransactions', transactions)
-            commit('updateTransactions', transactions)
+            commit('updateLoading', true)
+                
         },
         async clickFastPayment({commit, dispatch}, newTransaction){
             let ID =  await dispatch('idGenerator');
@@ -70,11 +76,15 @@ export default {
                 total: newTotal
                 })
             dispatch('fetchCards')
-        }
+        },
+        
     },
     mutations: {
         updateTransactions(state, transactions){
             state.transactions = transactions
+        },
+        updateLoading(state, loading){
+            state.loading = loading
         }
     }
 }

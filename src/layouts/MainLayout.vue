@@ -1,5 +1,5 @@
 <template>
-    <div class="MainLayout">
+    <div class="main-layout">
         <!-- <h2>This is MainLayout</h2> -->
         <Header/>
         <Main/>
@@ -21,5 +21,14 @@ export default {
 }
 </script>
 <style scoped>
+.main-layout{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* flex-grow: 1; */
+}
+/* .main{
+    height: 100%;
+} */
 
 </style>

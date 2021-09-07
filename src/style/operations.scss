@@ -7,10 +7,11 @@
 
     &__content{
         max-width: 1200px;
+        height: 100%;
         width: 100%;
         margin: 0 auto;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         padding: 30px;
     }
 }
@@ -56,6 +57,10 @@
         align-items: center;
         width: 100%;
         border-bottom: 1px solid #F2F3F7;
+    }
+
+    &__item:hover{
+        background-color: #70707c0c;
     }
 
     &__direction{
@@ -195,14 +200,9 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 16px;
-    /* identical to box height, or 100% */
-
     display: flex;
     align-items: center;
     letter-spacing: -0.009em;
-
-    /* White Theme / Gray - 10 */
-
     color: #16161E;
 }
 

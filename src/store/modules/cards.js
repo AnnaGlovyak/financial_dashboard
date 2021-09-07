@@ -1,11 +1,13 @@
 import { db } from '../../main.js'
 import { collection, getDocs, setDoc, doc } from "firebase/firestore"; 
+import axios from 'axios';
 // import { push } from 'core-js/core/array';
 
 export default {
     state: {
         cards: [],
         payments: [],
+        currency: []
     },
     getters: {
         allPayments(state){
@@ -14,6 +16,9 @@ export default {
         allCards(state){
             return state.cards
         },
+        allCurrency(state){
+            return state.currency
+        }
     },
     actions: {
         async fetchCards(context){
@@ -57,7 +62,19 @@ export default {
                 })
             dispatch('fetchCards')
             commit('updateCards')
+        },
+        async getCurrency(context){
+            let currency = []
+            await axios
+            .get('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+            .then(response => {
+                response.data
+                .forEach(resp => {currency.push(resp) })
+            })
+            currency.pop()
+            context.commit('updateCurrency', currency)
         }
+        
     },
     mutations: {
         updateCards(state, cards){
@@ -65,6 +82,9 @@ export default {
         },
         updatePayments(state, payments){
             state.payments = payments
+        },
+        updateCurrency(state, currency){
+            state.currency = currency
         }
     }
 }

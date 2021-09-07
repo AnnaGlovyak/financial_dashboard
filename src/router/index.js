@@ -2,48 +2,38 @@
 import VueRouter from 'vue-router'
 import Home from '../pages/Home.vue'
 import Auth from '../pages/Auth.vue'
-
+import store from '../store'
 
 
 const routes = [
+  // {
+  //   path: '/',
+  //   redirect: '/login'
+  // },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
-    meta: { layout: 'main'}
-  },
-  {
-    path: '/about',
-    name: 'About',
-    meta: { layout: 'main'},
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../pages/About.vue')
+    // meta: {  auth: true}
+    meta: { layout: 'main', authRequired: true}
   },
   {
     path: '/operations',
     name: 'Operations',
     component: () => import('../components/Operations.vue'),
-    meta: { layout: 'main', auth: true}
+    meta: { layout: 'main', authRequired: true}
   },
   {
     path: '/analytics',
     name: 'Analytics',
     component: () => import('../components/Analytics.vue'),
-    meta: { layout: 'main', auth: true}
-  },
-  {
-    path: '/card',
-    name: 'Card',
-    component: () => import('../pages/Card.vue'),
-    meta: { layout: 'card', auth: true}
+    meta: { layout: 'main', authRequired: true}
   },
   {
     path: '/login',
     name: 'Auth',
     component: Auth,
-    meta: {layout: 'auth', auth: false}
+    meta: {layout: 'auth', authRequired: false}
   }
 ]
 
@@ -51,4 +41,19 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if(!store.state.user) {
+      next({
+        // path: '/home',
+        // query: { redirect: to.fullPath }
+      })
+      return
+    }
+    next()
+  } else {
+    next()
+  }
+})
 export default router
+

@@ -9,6 +9,7 @@
 <style scoped>
     .main {
         /* background-color: rgb(197, 197, 247); */
+        flex-grow: 1;
         max-width: 1600px;
         width: 100%;
         margin: 0 auto;

@@ -1,0 +1,73 @@
+.charts{
+    height: 100%;
+    max-width: 1600px;
+    width: 100%;
+    background: #F2F3F7;
+
+    &__content{
+        display: flex;
+        flex-direction: row;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        // background-color: white;
+        border-radius: 20px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    &__title{
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 34px;
+        color: #2E2E3A;
+        align-self: flex-start;
+    }
+
+    &__main{
+        width: 50%;
+    margin: 20px;
+    padding: 50px;
+    // padding-right: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 100px 80px rgb(199 203 217 / 7%), 0px 41.7776px 33.4221px rgb(199 203 217 / 5%), 0px 22.3363px 17.869px rgb(199 203 217 / 4%), 0px 12.5216px 10.0172px rgb(199 203 217 / 4%), 0px 6.6501px 5.32008px rgb(199 203 217 / 3%), 0px 2.76726px 2.21381px rgb(199 203 217 / 2%);
+    }
+
+    &__mainChart{
+        // width: 50%;
+        // margin: 20px;
+        // padding: 50px;
+        // // padding-right: 30px;
+        // background-color: white;
+        // border-radius: 20px;
+        // box-shadow: 0px 100px 80px rgb(199 203 217 / 7%), 0px 41.7776px 33.4221px rgb(199 203 217 / 5%), 0px 22.3363px 17.869px rgb(199 203 217 / 4%), 0px 12.5216px 10.0172px rgb(199 203 217 / 4%), 0px 6.6501px 5.32008px rgb(199 203 217 / 3%), 0px 2.76726px 2.21381px rgb(199 203 217 / 2%);
+    }
+
+    &__transactions{
+        width: 50%;
+        margin: 20px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        // padding-right: 30px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 100px 80px rgb(199 203 217 / 7%), 0px 41.7776px 33.4221px rgb(199 203 217 / 5%), 0px 22.3363px 17.869px rgb(199 203 217 / 4%), 0px 12.5216px 10.0172px rgb(199 203 217 / 4%), 0px 6.6501px 5.32008px rgb(199 203 217 / 3%), 0px 2.76726px 2.21381px rgb(199 203 217 / 2%);
+        
+    }
+
+    &__transactions-content{
+        padding: 40px;
+    }
+
+    &__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 50px;
+    }
+}

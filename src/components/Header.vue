@@ -33,7 +33,7 @@
         </div>
         <nav class="header__navigation">
             <ul class="navigation-list">
-                <li class="navigation-list__item"><router-link to="/" class="navigation-list__link">Dashboard</router-link></li>
+                <li class="navigation-list__item"><router-link to="/home" class="navigation-list__link">Dashboard</router-link></li>
                 <li class="navigation-list__item"><router-link to="/operations" class="navigation-list__link">Operation</router-link></li>
                 <li class="navigation-list__item"><router-link to="/analytics" class="navigation-list__link">Analytics</router-link></li>
             </ul>
@@ -41,8 +41,9 @@
         <div class="header__user">
             <img src="@/assets/Userpic.png" alt="user" class="user__img">
             <div class="user__info">
-                <div class="user__name">Anna Glovyak</div>
-                <div class="user__title">developer</div>
+                <!-- <div class="user__name">name</div> -->
+                <div class="user__name">{{ user.email }}</div>
+                <button class="user__title" @click="logout()">Log out</button>
             </div>
         </div>       
         
@@ -50,7 +51,8 @@
     
 </template>
 <script>
-
+import { getAuth, signOut } from "firebase/auth";
+import {mapGetters} from 'vuex'
 
 export default {
     data(){
@@ -58,6 +60,22 @@ export default {
             menuOpen: true
         }
     },
+    computed: {
+        ...mapGetters(['user']),
+        
+    },
+    methods:{
+        logout(){
+            const auth = getAuth();
+            signOut(auth).then(() => {
+            this.$router.push('/login')
+            //
+            }).catch((error) => {
+            // An error happened.
+            });
+
+        }
+    }
 }
 </script>
 

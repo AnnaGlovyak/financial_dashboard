@@ -1,17 +1,10 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/> -->
     <component :is="layout"/>
-    <!-- <MainLayout/> -->
   </div>
 </template>
 <script>
 import MainLayout from './layouts/MainLayout.vue'
-import CardLayout from './layouts/CardLayout.vue'
 import AuthLayout from './layouts/AuthLayout.vue'
 
 
@@ -19,7 +12,6 @@ export default {
   
     components: {
       MainLayout,
-      CardLayout,
       AuthLayout,
     },
     computed: {

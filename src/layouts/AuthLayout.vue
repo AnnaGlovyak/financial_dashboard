@@ -17,7 +17,6 @@ export default {
 
 <style lang="scss" scoped>
 .auth-layout {
-    background: #fff7ff;;
     height: 100%;
     display: flex;
     align-items: center;
