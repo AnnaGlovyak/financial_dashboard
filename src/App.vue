@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <component :is="layout"/>
+    <div v-if="$route.meta.layout">
+      <component :is="layout"/>
+    </div>
   </div>
 </template>
 <script>
@@ -9,16 +11,13 @@ import AuthLayout from './layouts/AuthLayout.vue'
 
 
 export default {
-  
     components: {
       MainLayout,
       AuthLayout,
     },
     computed: {
       layout() {
-        // console.log('this path', this.$route.path)
           return  (this.$route.meta.layout) + '-layout'
-         
       }
     }
 }

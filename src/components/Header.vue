@@ -40,9 +40,8 @@
         <div class="header__user">
             <img src="@/assets/Userpic.png" alt="user" class="user__img">
             <div class="user__info">
-                <!-- <div class="user__name">name</div> -->
-                <div class="user__name" v-if="user.email">{{ user.email }}</div>
-                <button class="user__title" @click="logout()" v-if="user.email" >Log out</button>
+                <div class="user__name" v-if="user">{{ user.email }}</div>
+                <button class="user__title" @click="logout()" v-if="user" >Log out</button>
             </div>
         </div>       
         
