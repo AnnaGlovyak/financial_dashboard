@@ -57,8 +57,7 @@
                     </select>
                 </div>
                 <div class="statistic__chart" >
-                   <!-- <doughnut-chart :chartdata="chartData" :options="chartOptions"/> -->
-                    <canvas ref="canvas"></canvas>
+                    <pie-chart v-if="chartData" :data="chartData" :options="chartOptions"></pie-chart>
                 </div>
             </div>
         </div> 
@@ -68,33 +67,34 @@
 <script>
 
 import {mapGetters, mapActions} from 'vuex'
-import { Doughnut } from 'vue-chartjs'
+import PieChart from "../charts/PieChart.js"
 
 export default {
-    extends: Doughnut,
+    components: {
+        PieChart
+    },
     data(){
-       
         return{
+            chartOptions: {
+                hoverBorderWidth: 20,
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'pink',
+                        fontFamily: 'Calibri Light',
+                        fontStyle: 'italic',
+                    }
+                }
+            },
+            chartData: null,
             showDialog: false,
-            depImg: '',
-            departmentImages: [
-                {
-                    name: 'Other',
-                    src: '../assets/electronica.png'
-                },
-                {
-                    name: 'Pharmacy',
-                    src: '../assets/pharmacy.png'
-                },
-                {
-                    name: 'Cafe',
-                    src: '../assets/resto.png'
-                },
-                {
-                    name: 'Food',
-                    src: '../assets/food.png'
-                },
+            backgroundColors: [
+                'rgba(10, 175, 125, 1)',
+                'rgba(10, 175, 255, 1)',
+                'rgba(255, 122, 47, 1)',
+                'rgba(161, 98, 247, 1)'
             ],
+            depImg: '',
             n: 6,
         }  
     },
@@ -132,59 +132,39 @@ export default {
         }
         
     },
-    created(){
-           
-    },
     async mounted(){     
         await this.fetchTransactions(),
-        await this.setupChart(this.departmentImages);
+        await this.setupChart();
     },
     methods: {
         ...mapActions(['fetchTransactions', 'idGenerator']),
-
         addTransaction(payload){
             this.$emit('new-transaction', payload)
             console.log('new transaction from Operations')
         },
-        setupChart(departmentImages){
+        setupChart(){
             if(this.loading){
-                this.renderChart({
-                labels: departmentImages.map(department => department.name),
-                datasets: [{
-                    label: 'Total expenses',
-                    data: departmentImages.map(d => {
-                        return this.allTransactions.reduce((total, tr) => {
-                            if(tr.department === d.name){
-                                total += tr.sum
-                            } return total
-                        }, 0)
-                    }),
-                    backgroundColor: [
-                        'rgba(10, 175, 125, 1)',
-                        'rgba(10, 175, 255, 1)',
-                        'rgba(255, 122, 47, 1)',
-                        'rgba(161, 98, 247, 1)'
-                    ],
-                    // borderWidth: 1,
+                const calculatedTransactions = this.allTransactions.reduce((acc, transaction) => {
+                    acc[transaction.department] = transaction.sum
+                    return acc
+                }, {})
 
-                }],
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                        position: 'bottom',
+                const initChartData = {
+                    labels: [],
+                    datasets: [
+                        {
+                             backgroundColor: [],
+                             data: []
                         }
-                    },
-                    layout: {
-                        padding: {
-                            left: 50
-                        }
-                    }
-                    
+                    ]
                 }
-            })
+                for (const [key, index] in calculatedTransactions) {
+                    initChartData.labels.push(key)
+                    initChartData.datasets[0].backgroundColor.push(this.backgroundColors[index])
+                    initChartData.datasets[0].data.push(calculatedTransactions[key])
+                }
+                this.chartData = initChartData
             }
-            
         },
         moreTransactions(b){
             console.log('moreTransactions')
