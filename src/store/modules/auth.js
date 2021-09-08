@@ -10,6 +10,9 @@ export default {
         }
     },
     actions: {
+        logutUser(context, user){
+            context.commit('updateUser', user);
+        }
     },
     mutations: {
         updateUser(state, { user }){

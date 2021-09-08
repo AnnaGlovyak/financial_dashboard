@@ -14,16 +14,16 @@
       <div class="charts__transactions">
         <div class="charts__header">
           <h1 class="charts__title">Spending by category</h1>
-          <select name="popular" id="popular" class="button--popular">
-              <option value="popular" class="button--option">Other</option>
-              <option value="popular" class="button--option">Food</option>
-              <option value="popular" class="button--option">Pharmacy</option>
+          <select name="category" id="category" class="button--popular" @change="fillDataLineChart()" v-model="chartCategory">
+              <option value="Other" class="button--option">Other</option>
+              <option value="Food" class="button--option">Food</option>
+              <option value="Pharmacy" class="button--option" selected>Pharmacy</option>
               
           </select>
         </div>
         <div class="charts__transactions-content">
           <div class="aside__chart">
-            <line-chart :chart-data="datacollectionLineChart"></line-chart>
+            <line-chart :chart-data="datacollectionLineChart" :options="lineChartOptions"></line-chart>
             <!-- <button @click="getTransactionsByCategory('Food')">category</button> -->
           </div>
         </div>
@@ -47,6 +47,8 @@
         datacollectionBarChart: null,
         datacollectionLineChart: null,
         barChartOptions: null,
+        lineChartOptions: null,
+        chartCategory: '',
       }
     },
     computed: {
@@ -72,8 +74,8 @@
           return objData
       },
       getDataLineChart(){
-        console.log(this.getTransactionsByCategory())
-        return this.getTransactionsByCategory()
+        console.log(this.getTransactionsByCategory(this.chartCategory))
+        return this.getTransactionsByCategory(this.chartCategory)
       } 
     },
     created(){
@@ -162,13 +164,22 @@
         }
       },
       fillDataLineChart () {
+        // console.log(event.target.value)
+        
+
+        // arr.filter(function(item, pos) {
+        //         return arr.indexOf(item) == pos;
+        //       })
+
+
         this.datacollectionLineChart = {
-          labels: this.getDataSpendingByMounth.month,
+          labels: this.getDataLineChart.date.map(date => date.toDate().toLocaleString('en-US', { month: 'long' })),
+          // labels:,
           datasets: [
             {
               label: 'Category name',
               backgroundColor: 'rgba(255, 122, 47, 1)',
-              data: this.getDataLineChart,
+              data: this.getDataLineChart.sums,
               scaleOverride:true,
               scaleSteps:20,
               scaleStartValue:0,
@@ -215,12 +226,17 @@
         }
       },
       getTransactionsByCategory(category = 'Other'){
-       return this.allTransactions.reduce((totalSums, tr) => {
+        if(category == ''){ category = 'Other' } 
+       return this.allTransactions.reduce((total, tr) => {
           if(tr.department === category){
             // console.log(tr.sum)
-            totalSums.push(tr.sum)
-            }return totalSums
-          }, []);
+            total.sums.push(tr.sum);
+            total.date.push(tr.date)
+            } return total
+          }, {
+              sums: [],
+              date: [],
+              });
         }
     }
   }

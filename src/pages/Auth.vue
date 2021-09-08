@@ -15,11 +15,8 @@
 </template>
 <script>
 
-// import { getAuth } from 'firebase/auth';
-// import { initializeApp } from "firebase/app"
 import {mapGetters} from 'vuex'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
 
 export default {
     data(){

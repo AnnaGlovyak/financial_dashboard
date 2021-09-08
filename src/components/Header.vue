@@ -42,8 +42,8 @@
             <img src="@/assets/Userpic.png" alt="user" class="user__img">
             <div class="user__info">
                 <!-- <div class="user__name">name</div> -->
-                <div class="user__name">{{ user.email }}</div>
-                <button class="user__title" @click="logout()">Log out</button>
+                <div class="user__name" v-if="user.email">{{ user.email }}</div>
+                <button class="user__title" @click="logout()" v-if="user.email" >Log out</button>
             </div>
         </div>       
         
@@ -52,7 +52,7 @@
 </template>
 <script>
 import { getAuth, signOut } from "firebase/auth";
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
     data(){
@@ -65,10 +65,13 @@ export default {
         
     },
     methods:{
-        logout(){
+        ...mapActions(['logutUser']),
+        async logout(){
             const auth = getAuth();
             signOut(auth).then(() => {
-            this.$router.push('/login')
+            this.user = null;
+            this.logutUser(this.user);
+            this.$router.push('/login');
             //
             }).catch((error) => {
             // An error happened.
