@@ -50,18 +50,8 @@
                                 <div></div>
                                 <p class="info-list__computed-date">sale <span class="info-list__currency-price--sale">{{ currency.sale.substring(0,5) }}</span></p>
                             </div>
-                            
                         </div>
-                        
                     </div>
-                    <!-- <div class="info-list__item">
-                        <p class="info-list__title">Income</p>
-                        <div class="info-list__cash">
-                            <p class="info-list__sum">$32,134</p>
-                            <p class="info-list__trend">↑2.5%</p>
-                        </div>
-                        <p class="info-list__computed-date">Compared to $890 last month</p>
-                    </div> -->
                 </li>
             </ul>
             <div class="fast-payment">
@@ -137,13 +127,7 @@
                         <input type="text" v-model="newCardHolder" required class="modal__input">
                         <label class="modal__input-label">Input total sum</label>
                         <input type="text" v-model="newCardTotal" required class="modal__input">
-                        <!-- <select class="modal__select" name="selectCard" id="selectCard" v-on:change="selectOptionCard" required>
-                            <option value="" disabled selected hidden>Choose card</option>
-                            <option class="modal__option" v-for="card in allCards" :key="card.number" :value="card.number"> {{ card.name }}, {{ card.currency }}, {{ card.total }}</option>
-                        </select> -->
                     </div>
-                        
-
                     <md-dialog-actions>
                         <md-button class="md-primary" @click="showDialogCard = false">Close</md-button>
                         <md-button class="md-primary" @click="addNewCard()">Add</md-button>
@@ -188,7 +172,6 @@ export default {
         console.log(this.allCurrency)
     },
     mounted(){
-        // this.$store.dispatch('fetchCards')
         
     },
     methods: {
@@ -258,6 +241,4 @@ export default {
     .modal{
         display: flex;
     }
-    
-
 </style>

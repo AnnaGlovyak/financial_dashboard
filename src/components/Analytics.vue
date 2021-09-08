@@ -177,7 +177,7 @@
           // labels:,
           datasets: [
             {
-              label: 'Category name',
+              label: this.chartCategory,
               backgroundColor: 'rgba(255, 122, 47, 1)',
               data: this.getDataLineChart.sums,
               scaleOverride:true,
@@ -229,7 +229,6 @@
         if(category == ''){ category = 'Other' } 
        return this.allTransactions.reduce((total, tr) => {
           if(tr.department === category){
-            // console.log(tr.sum)
             total.sums.push(tr.sum);
             total.date.push(tr.date)
             } return total

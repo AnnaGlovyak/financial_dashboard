@@ -1,7 +1,6 @@
 <template>
     <header class="header">
         <div class="header--container">
-            
             <span class="header__menu-button"  @click="menuOpen = !menuOpen">
                 <md-icon>menu</md-icon>
             </span>

@@ -15,9 +15,10 @@ export default {
 <style scoped>
     
 .footer {
+    max-width: 1600px;
     width: 100%;
     height: 40px;
-    flex-shrink: 1;
+    margin: 0 auto;
     align-self: flex-end;
     background: #d0d2da;
     padding: 10px;

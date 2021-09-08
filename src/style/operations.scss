@@ -6,13 +6,15 @@
     margin: 0 auto;
 
     &__content{
-        max-width: 1200px;
+        max-width: 1144px;
         height: 100%;
         width: 100%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        padding: 30px;
+        // padding: 30px;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 }
 
@@ -42,7 +44,7 @@
 
     &__list{
         padding-top: 30px;
-        max-height: 470px;
+        height: 600px;
         overflow: auto;
     }
     ::-webkit-scrollbar { /* chrome based */
@@ -234,4 +236,8 @@
         max-width: 350px;
         margin-top: 40px;
     }
+}
+
+.home__operations .transactions__list{
+    max-height: 250px;
 }

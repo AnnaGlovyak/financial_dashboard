@@ -87,25 +87,30 @@ button {
     justify-content: space-between;
     padding-left: 0;
     margin: 0 auto;
-    // overflow: scroll;
+    overflow: auto;
+}
+.cards-list::-webkit-scrollbar { /* chrome based */
+    width: 0px;  /* ширина scrollbar'a */
+    height: 0px;
+    background: transparent;  /* опционально */
 }
 
 .card {
-    width: 368px;
+    min-width: 368px;
+    width: 350px;
     height: 218px;
     box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(90deg, #02AAB0 0%, #00CDAC 100%);
     -webkit-box-shadow: 5px 52px 32px -1px rgba(32, 190, 151, 0.14);
     -moz-box-shadow: 5px 52px 32px -1px rgba(33, 182, 145, 0.14);
     box-shadow: 5px 52px 32px -1px rgba(31, 161, 129, 0.14);
     position: relative;
     overflow: hidden;
     border-radius: 30px;
+    margin: 0 5px;
 
     &__background {
         width: 100%;
-        height: 100%;
-        background-size: cover;
+        height: auto;
         border-radius: 30px;
     }
 
@@ -300,7 +305,6 @@ li.card{
     }
 
     &__currency{
-        
         display: flex;
         flex-direction: column;
         justify-content: space-between;

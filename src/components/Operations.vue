@@ -2,7 +2,7 @@
     <div class="operations">
         <div class="operations__content">
             <div class="transactions">
-                <h2 class="transactions__title">Last transaction  {{ loading }}</h2>
+                <h2 class="transactions__title">Last transaction</h2>
                 <ul class="transactions__list">
                     <li class="transactions__item" v-for="(transaction, index) in allTransactions" :key="transaction.number">
                         <div class="transactions__category">

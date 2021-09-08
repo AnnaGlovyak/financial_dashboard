@@ -16,7 +16,6 @@ export default {
   },
   layout: {
       padding: {
-          left: 50
       }
   },
   animations: {
@@ -38,9 +37,9 @@ export default {
   computed: {
     ...mapGetters(['loading']),
   },
-  async mounted () {
+ mounted () {
     // await this.fetchTransactions()
-    await this.renderChart(this.chartData, this.options)
+    this.renderChart(this.chartData, this.options)
   },
   methods:{
     ...mapActions(['fetchTransactions']),
