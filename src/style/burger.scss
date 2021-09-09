@@ -74,6 +74,10 @@
     color: #2E2E3A;
   }
 
+  a:not(.md-button):hover{
+    text-decoration: none!important;
+  }
+
   .burger-menu__item .md-icon{
       margin: 0 !important;
       margin-right: 30px !important;

@@ -80,6 +80,13 @@
     .header__menu-button{
         display: block;
     }
+
+    .user{
+        width: 200px;
+    }
+    .user__img{
+        display: none;
+    }
     .operations{
         max-width: 540px;
 
@@ -167,7 +174,9 @@
 }
 @media screen and (max-width: 540px) {
     .header {
-        max-width: 300px;
+        max-width: 200px;
+        align-self: flex-end;
+        justify-content: flex-end;
 
         &__user{
             max-width: 300px;

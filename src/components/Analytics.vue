@@ -24,7 +24,6 @@
         <div class="charts__transactions-content">
           <div class="aside__chart">
             <line-chart :chart-data="datacollectionLineChart" :options="lineChartOptions"></line-chart>
-            <!-- <button @click="getTransactionsByCategory('Food')">category</button> -->
           </div>
         </div>
       </div>
@@ -86,7 +85,6 @@
           return objData
       },
       getDataLineChart(){
-        // console.log(this.getTransactionsByCategory(this.chartCategory))
         return this.getTransactionsByCategory(this.chartCategory)
       } 
     },
@@ -109,7 +107,6 @@
           datasets: [
             {
               label: 'Total spending',
-              // backgroundColor: 'rgba(10, 175, 125, 1)',
               data: this.getDataSpendingByMounth.spendings,
               scaleOverride:true,
               scaleSteps:20,
@@ -128,62 +125,16 @@
                         '#D9AAFF',
 
                     ],
-            }, 
-            // {
-            //   label: 'Data Two',
-            //   backgroundColor: 'rgba(10, 175, 255, 1)',
-            //   data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
-            //   scaleOverride:true,
-            //     scaleSteps:20,
-            //     scaleStartValue:0,
-            //     scaleStepWidth:1,
-            //     scale: 10,
-            // },
-            
+            },            
           ]
         }
-        // this.barChartOptions = {
-        //   responsive: true,
-        //   legend: {
-        //       display: false,
-        //       position: 'bottom',
-        //       },
-          
-        //   layout: {
-        //       padding: {
-        //           left: 50
-        //       }
-        //   },
-        //   animations: {
-        //     tension: {
-        //       duration: 1000,
-        //       easing: 'linear',
-        //       from: 1,
-        //       to: 0,
-        //       loop: true
-        //     }
-        //   },
-        //   scales: {
-        //     y: { // defining min and max so hiding the dataset does not change scale range
-        //       min: 0,
-        //       max: 100
-        //     }
-        //   }
-        
-        // }
       },
       fillDataLineChart () {
-        // console.log(event.target.value)
-        
-
-        // arr.filter(function(item, pos) {
-        //         return arr.indexOf(item) == pos;
-        //       })
-
-
+        let monthArray = this.getDataLineChart.date.map(date => date.toDate().toLocaleString('en-US', { month: 'long' }))
         this.datacollectionLineChart = {
-          labels: this.getDataLineChart.date.map(date => date.toDate().toLocaleString('en-US', { month: 'long' })),
-          // labels:,
+          labels: monthArray.filter(function(item, pos) {
+              return monthArray.indexOf(item) == pos;
+            }),
           datasets: [
             {
               label: this.chartCategory,
@@ -194,43 +145,7 @@
               scaleStartValue:0,
               scaleStepWidth:1,
               scale: 10,
-              // backgroundColor: [
-              //           'rgba(10, 175, 125, 1)',
-              //           'rgba(10, 175, 255, 1)',
-              //           'rgba(255, 122, 47, 1)',
-              //           'rgba(161, 98, 247, 1)',
-              //           '#FEB907',
-              //           '#F84439',
-              //           '#D9FFDF',
-              //           '#3346E7',
-              //           '#D9AAFF',
-
-              //       ],
             }, 
-            // {
-            //   label: 'Data Two',
-            //   backgroundColor: 'rgba(10, 175, 255, 1)',
-            //   data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
-            //   scaleOverride:true,
-            //     scaleSteps:20,
-            //     scaleStartValue:0,
-            //     scaleStepWidth:1,
-            //     scale: 10,
-            // },
-            // options: {
-            //         responsive: true,
-            //         plugins: {
-            //             legend: {
-            //             position: 'bottom',
-            //             }
-            //         },
-            //         layout: {
-            //             padding: {
-            //                 left: 50
-            //             }
-            //         }
-                    
-            //     }
           ]
         }
       },
@@ -252,10 +167,4 @@
 </script>
 
 <style>
-/* .charts{
-  height: 100%;
-}
-  .mainChart {
-    height: 100%;
-  } */
 </style>

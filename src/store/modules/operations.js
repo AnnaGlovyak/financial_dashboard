@@ -23,7 +23,8 @@ export default {
             const q = query(collection(db, "transactions"), orderBy("date", "desc"), limit());
             await getDocs(q)
             .then( docs => docs.forEach((doc) => {
-                    transactions.push(doc.data());}));
+                    transactions.push(doc.data());
+                }));
             commit('updateTransactions', transactions)
             commit('updateLoading', true)
                 
@@ -37,8 +38,6 @@ export default {
                         department: newTransaction.department,
                         date: Timestamp.now(),
                         cardNumber: newTransaction.cardNumber,
-                        // cardId: newTransaction.cardId,
-                        // fastPaymentId: newTransaction.paymentid
                         })
             dispatch('getCardByParametr', newTransaction)
             dispatch('fetchTransactions')
@@ -60,7 +59,6 @@ export default {
             let newTotal = 0
             await getDocs(collection(db,"cards"), where("number", "==", "4995678936570320"))
             .then( docs => docs.forEach((doc) => {
-
                 if(doc.data().number == transaction.cardNumber){
                     ID = doc.id
                     cardByParametr = doc.data()

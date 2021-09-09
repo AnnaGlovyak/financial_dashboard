@@ -1,37 +1,12 @@
 <template>
     <header class="header">
         <div class="header--container">
-            <!-- <span class="header__menu-button"  @click="menuOpen = !menuOpen">
-                <md-icon>menu</md-icon>
-            </span> -->
-            <Slide class="header__menu-button burger-menu">
+            <Slide class="header__menu-button burger-menu" :closeOnNavigation="true" noOverlay>
                 <router-link to="/home" class="burger-menu__item"><md-icon>credit_card</md-icon>Dashboard</router-link>
                 <router-link to="/operations" class="burger-menu__item"><md-icon>autorenew</md-icon>Operations</router-link>
                 <router-link to="/analytics" class="burger-menu__item"><md-icon>assessment</md-icon>Analytics</router-link>
             </Slide>
             <div class="header__aside aside" >   
-          <!--:class="{'show-menu': menuOpen}" -->
-                <!-- <ul class="aside__menu" :class="{'show-menu': menuOpen}">
-                    <li class="menu__item" to="/">
-                        <span class="menu__title">My cards</span>
-                        <div class="menu__content">
-                            <div class="menu__card">
-                                <md-icon>business</md-icon>card 1</div>
-                            <div class="menu__card">card 1</div>
-                            <div class="menu__card">card 1</div>
-                        </div>
-                    </li>
-                    <li class="menu__item" to="/operations">
-                        <span class="menu__title">Wish List</span>
-                        <div class="menu__content">
-                            <div class="menu__card">
-                                <md-icon>business</md-icon>card 1</div>
-                            <div class="menu__card">card 1</div>
-                            <div class="menu__card">card 1</div>
-                        </div>
-                    </li>
-                </ul> -->
-        <!-- <button @click="logout">Log out</button> -->
     </div>
 
         </div>
@@ -45,7 +20,6 @@
         <div class="header__user">
             <img src="@/assets/Userpic.png" alt="user" class="user__img">
             <div class="user__info">
-                <!-- <div class="user__name">name</div> -->
                 <div class="user__name" v-if="user.email">{{ user.email }}</div>
                 <button class="user__title" @click="logout()" v-if="user.email" >Log out</button>
             </div>
@@ -82,7 +56,6 @@ export default {
             this.$router.push('/login');
             //
             }).catch((error) => {
-            // An error happened.
             });
 
         }
