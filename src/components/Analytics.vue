@@ -15,10 +15,10 @@
         <div class="charts__header">
           <h1 class="charts__title">Spending by category</h1>
           <select name="category" id="category" class="button--popular" @change="fillDataLineChart()" v-model="chartCategory">
-              <option value="Other" class="button--option">Other</option>
+              <option value="Other" class="button--option" selected>Other</option>
               <option value="Food" class="button--option">Food</option>
-              <option value="Pharmacy" class="button--option" selected>Pharmacy</option>
-              
+              <option value="Pharmacy" class="button--option" >Pharmacy</option>
+              <option value="Cafe" class="button--option" >Cafe</option>
           </select>
         </div>
         <div class="charts__transactions-content">
@@ -46,9 +46,21 @@
       return {
         datacollectionBarChart: null,
         datacollectionLineChart: null,
-        barChartOptions: null,
-        lineChartOptions: null,
-        chartCategory: '',
+        barChartOptions: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        },
+                },
+        lineChartOptions: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        },
+                },
+        chartCategory: 'Other',
       }
     },
     computed: {
@@ -74,7 +86,7 @@
           return objData
       },
       getDataLineChart(){
-        console.log(this.getTransactionsByCategory(this.chartCategory))
+        // console.log(this.getTransactionsByCategory(this.chartCategory))
         return this.getTransactionsByCategory(this.chartCategory)
       } 
     },
@@ -86,7 +98,8 @@
       await this.fetchTransactions();
       await this.fillDataBarChart();
       await this.fillDataLineChart();
-      
+      this.renderChart(this.datacollectionBarChart, this.barChartOptions)
+      this.renderChart(this.datacollectionLineChart, this.lineChartOptions)
     },
     methods: {
       ...mapActions(['fetchTransactions', 'fetchCards']),
@@ -128,40 +141,36 @@
             // },
             
           ]
-        },
-        this.barChartOptions = {
-          responsive: true,
-          defaults:{
-            plugins: {
-              legend: {
-              display: false,
-              position: 'bottom',
-              }
-            },
-          },
-          
-          layout: {
-              padding: {
-                  left: 50
-              }
-          },
-          animations: {
-            tension: {
-              duration: 1000,
-              easing: 'linear',
-              from: 1,
-              to: 0,
-              loop: true
-            }
-          },
-          scales: {
-            y: { // defining min and max so hiding the dataset does not change scale range
-              min: 0,
-              max: 100
-            }
-          }
-        
         }
+        // this.barChartOptions = {
+        //   responsive: true,
+        //   legend: {
+        //       display: false,
+        //       position: 'bottom',
+        //       },
+          
+        //   layout: {
+        //       padding: {
+        //           left: 50
+        //       }
+        //   },
+        //   animations: {
+        //     tension: {
+        //       duration: 1000,
+        //       easing: 'linear',
+        //       from: 1,
+        //       to: 0,
+        //       loop: true
+        //     }
+        //   },
+        //   scales: {
+        //     y: { // defining min and max so hiding the dataset does not change scale range
+        //       min: 0,
+        //       max: 100
+        //     }
+        //   }
+        
+        // }
       },
       fillDataLineChart () {
         // console.log(event.target.value)

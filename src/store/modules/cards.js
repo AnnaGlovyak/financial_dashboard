@@ -1,7 +1,6 @@
 import { db } from '../../main.js'
 import { collection, getDocs, setDoc, doc } from "firebase/firestore"; 
 import axios from 'axios';
-// import { push } from 'core-js/core/array';
 
 export default {
     state: {

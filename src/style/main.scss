@@ -1,5 +1,6 @@
 @import 'reset.css';
 @import 'header.scss';
+@import 'burger.scss';
 @import 'cards.scss';
 @import 'operations.scss';
 @import 'charts.scss';
@@ -29,6 +30,6 @@ html, body {
     margin:  50px auto;
 }
 .md-theme-default a:not(.md-button){
-    color: black;
+    color: var(--md-theme-default-primary-on-background, #2E2E3A) !important;
     text-decoration: none;
 }

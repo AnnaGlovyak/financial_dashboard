@@ -68,7 +68,5 @@ export default {
     .home__operations .transactions__list{
         max-height: 250px !important
     }
-  /* .operations{
-    background: transparent;
-  } */
+  
 </style>

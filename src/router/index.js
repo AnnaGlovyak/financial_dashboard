@@ -6,15 +6,14 @@ import store from '../store'
 
 
 const routes = [
-  // {
-  //   path: '/',
-  //   redirect: '/login'
-  // },
+  {
+    path: '/',
+    redirect: '/login'
+  },
   {
     path: '/home',
     name: 'Home',
     component: Home,
-    // meta: {  auth: true}
     meta: { layout: 'main', authRequired: true}
   },
   {

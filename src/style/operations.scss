@@ -40,11 +40,12 @@
         line-height: 34px;
         color: #2E2E3A;
         align-self: flex-start;
+        margin-bottom: 20px;
     }
 
     &__list{
         padding-top: 30px;
-        height: 600px;
+        max-height: 700px;
         overflow: auto;
     }
     ::-webkit-scrollbar { /* chrome based */
@@ -211,6 +212,7 @@
 .statistic{
     width: 40%;
     display: flex;
+    height: 400px;
     flex-direction: column;
     padding: 28px 30px;
     background: #FFFFFF;
@@ -233,7 +235,7 @@
     }
 
     &__chart{
-        max-width: 350px;
+        max-width: 450px;
         margin-top: 40px;
     }
 }

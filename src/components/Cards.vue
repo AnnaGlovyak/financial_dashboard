@@ -3,7 +3,7 @@
         <div class="cards__content">
             <header class="cards__header">
                 <div class="content">
-                    <h2 class="page__title">Overview</h2>
+                    <div class="cards__title">Overview</div>
                     <button class="button--addCard" @click="showDialogCard = true">+ Add card</button>
                 </div>
                 <div class="content">

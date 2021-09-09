@@ -51,10 +51,10 @@
             <div class="statistic">
                 <div class="statistic__header">
                     <h2 class="statistic__title">Statistic</h2>
-                    <select name="popular" id="popular" class="button--popular">
+                    <!-- <select name="popular" id="popular" class="button--popular">
                         <option value="popular" class="button--option">date</option>
                         <option value="popular" class="button--option">categories</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="statistic__chart" >
                    <!-- <doughnut-chart :chartdata="chartData" :options="chartOptions"/> -->
@@ -165,24 +165,14 @@ export default {
                         'rgba(255, 122, 47, 1)',
                         'rgba(161, 98, 247, 1)'
                     ],
-                    // borderWidth: 1,
-
-                }],
-                options: {
+                }]},
+                {
                     responsive: true,
-                    plugins: {
-                        legend: {
-                        position: 'bottom',
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            left: 50
-                        }
-                    }
-                    
-                }
-            })
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        },
+                })
             }
             
         },

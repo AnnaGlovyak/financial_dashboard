@@ -1,24 +1,24 @@
-import { Pie } from 'vue-chartjs'
+import { Pie, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 
 export default {
   extends: Pie,
-  data: () => ({
-    chartdata: {
-      labels: ['Январь', 'Февраль'],
-      datasets: [
-        {
-          label: 'Данные 1',
-          backgroundColor: '#f87979',
-          data: [40, 20]
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  }),
-
+  mixins: [reactiveProp],
+  props: ['options'],
+//   options: {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: {
+//         legend: {
+//         position: 'bottom',
+//         }
+//     },
+//     layout: {
+//         padding: {
+//             left: 50
+//         }
+//     }  
+// },
   mounted () {
     this.renderChart(this.chartdata, this.options)
   }

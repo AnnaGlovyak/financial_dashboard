@@ -1,12 +1,17 @@
 <template>
     <header class="header">
         <div class="header--container">
-            <span class="header__menu-button"  @click="menuOpen = !menuOpen">
+            <!-- <span class="header__menu-button"  @click="menuOpen = !menuOpen">
                 <md-icon>menu</md-icon>
-            </span>
+            </span> -->
+            <Slide class="header__menu-button burger-menu">
+                <router-link to="/home" class="burger-menu__item"><md-icon>credit_card</md-icon>Dashboard</router-link>
+                <router-link to="/operations" class="burger-menu__item"><md-icon>autorenew</md-icon>Operations</router-link>
+                <router-link to="/analytics" class="burger-menu__item"><md-icon>assessment</md-icon>Analytics</router-link>
+            </Slide>
             <div class="header__aside aside" >   
           <!--:class="{'show-menu': menuOpen}" -->
-                <ul class="aside__menu" :class="{'show-menu': menuOpen}">
+                <!-- <ul class="aside__menu" :class="{'show-menu': menuOpen}">
                     <li class="menu__item" to="/">
                         <span class="menu__title">My cards</span>
                         <div class="menu__content">
@@ -25,7 +30,7 @@
                             <div class="menu__card">card 1</div>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
         <!-- <button @click="logout">Log out</button> -->
     </div>
 
@@ -51,13 +56,17 @@
 </template>
 <script>
 import { getAuth, signOut } from "firebase/auth";
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex';
+import { Slide } from 'vue-burger-menu'
 
 export default {
     data(){
         return {
             menuOpen: true
         }
+    },
+    components: {
+        Slide,
     },
     computed: {
         ...mapGetters(['user']),

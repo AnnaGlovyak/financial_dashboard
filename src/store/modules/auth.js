@@ -1,5 +1,3 @@
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
 export default {
     state: {
         user: null,
